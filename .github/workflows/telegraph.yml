@@ -1,0 +1,28 @@
+name: Publish to Telegraph
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - name: Publish Article
+        uses: jiacai2050/telegraph-action@v1
+        id: telegraph
+        with:
+          token: ${{ secrets.TELEGRAPH_TOKEN }}
+          title: "My First Telegraph Article"
+          md-file: "Readme.md"
+          author-name: "John Doe"
+          author-url: "https://johndoe.com"
+      - name: Output Result
+        run: |
+          echo "Telegraph Post URL: ${{ steps.telegraph.outputs.url }}"
+          echo "Title: ${{ steps.telegraph.outputs.title }}"
+          echo "Description: ${{ steps.telegraph.outputs.description }}"
+          echo "Path: ${{ steps.telegraph.outputs.path }}"
