@@ -1,0 +1,32 @@
+name: Send telegram message
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - name: Publish Article
+        uses: jiacai2050/telegram-action@main
+        id: telegram
+        with:
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          chat-id: "-1002672418956"
+          parse-mode: "MarkdownV2"
+          message: |
+            __Hello Telegram__
+            This is a post from GitHub Actions\!
+
+      - name: Output Result
+        run: |
+          echo "Message ID: ${{ steps.telegram.outputs.message-id }}"
+          echo "Date: ${{ steps.telegram.outputs.date }}"
+          echo "Text: ${{ steps.telegram.outputs.text }}"
+          echo "Chat ID: ${{ steps.telegram.outputs.chat-id }}"
+          echo "Chat Type: ${{ steps.telegram.outputs.chat-type }}"
+          echo "Chat Title: ${{ steps.telegram.outputs.chat-title }}"
