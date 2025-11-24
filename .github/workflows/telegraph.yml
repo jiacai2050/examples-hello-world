@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Publish Article
-        uses: jiacai2050/telegraph-action@v1
+        uses: jiacai2050/telegraph-action@main
         id: telegraph
         with:
           token: ${{ secrets.TELEGRAPH_TOKEN }}
