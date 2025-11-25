@@ -20,11 +20,12 @@ jobs:
           body-file: "Readme.md"
           author-name: "Telegraph Action"
           author-url: "https://github.com/jiacai2050/telegraph-action"
-          telegram-token: ${{ secrets.TELEGRAM_TOKEN }}
-          chat-id: "-1002672418956"
+          # telegram-token: ${{ secrets.TELEGRAM_TOKEN }}
+          # chat-id: "-1002672418956"
       - name: Output Result
         run: |
           echo "Telegraph Post URL: ${{ steps.telegraph.outputs.url }}"
           echo "Title: ${{ steps.telegraph.outputs.title }}"
           echo "Description: ${{ steps.telegraph.outputs.description }}"
           echo "Path: ${{ steps.telegraph.outputs.path }}"
+          echo '[${{ steps.telegraph.outputs.title }}](${{ steps.telegraph.outputs.url }})' >> $GITHUB_STEP_SUMMARY
