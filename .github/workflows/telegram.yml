@@ -2,16 +2,16 @@ name: Send telegram message
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - main
 jobs:
-  publish:
+  Send:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v5
-      - name: Publish Article
+      - name: Send Telegram Message
         uses: jiacai2050/telegram-action@main
         id: telegram
         with:

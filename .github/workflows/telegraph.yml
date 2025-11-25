@@ -2,9 +2,9 @@ name: Publish to Telegraph
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - main
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -17,9 +17,11 @@ jobs:
         with:
           token: ${{ secrets.TELEGRAPH_TOKEN }}
           title: "My First Telegraph Article"
-          md-file: "Readme.md"
-          author-name: "John Doe"
-          author-url: "https://johndoe.com"
+          body-file: "Readme.md"
+          author-name: "Telegraph Action"
+          author-url: "https://github.com/jiacai2050/telegraph-action"
+          telegram-token: ${{ secrets.TELEGRAM_TOKEN }}
+          chat-id: "-1002672418956"
       - name: Output Result
         run: |
           echo "Telegraph Post URL: ${{ steps.telegraph.outputs.url }}"
