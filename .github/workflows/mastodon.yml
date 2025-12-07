@@ -1,0 +1,30 @@
+name: Post Mastodon Status
+
+on:
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - main
+jobs:
+  Send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+      - name: Post Mastodon Status
+        uses: jiacai2050/mastodon-action@main
+        id: mastodon
+        with:
+          token: ${{ secrets.MASTODON_TOKEN }}
+          status: |
+            <h1>Hello Mastodon</h1>
+            This is a post from GitHub Actions
+
+      - name: Output Result
+        run: |
+          echo "- ID: ${{ steps.mastodon.outputs.id }}" >> $GITHUB_STEP_SUMMARY
+          echo "- URL: ${{ steps.mastodon.outputs.url }}"  >> $GITHUB_STEP_SUMMARY
+          echo "- URI: ${{ steps.mastodon.outputs.uri }}"  >> $GITHUB_STEP_SUMMARY
+          echo "- Date: ${{ steps.mastodon.outputs.created_at }} "  >> $GITHUB_STEP_SUMMARY
+          echo "- Content: ${{ steps.mastodon.outputs.content }}"  >> $GITHUB_STEP_SUMMARY
+          echo "- Visibility: ${{ steps.mastodon.outputs.visibility }}"  >> $GITHUB_STEP_SUMMARY
